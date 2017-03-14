@@ -14,14 +14,18 @@
 function Algo1($m,$n){
 	if(  preg_match("#^[0-9]+$#", $m) and preg_match("#^[0-9]+$#", $n)){
 		$bin = decbin($n);
+		echo $bin;
 		$x=2;
 		$taille = strlen($bin);
-		$res=0;
+		$res=$m;
 		for($i=0;$i<$taille-1;$i++){
-			if($i==0 and $bin[$i+1]==1) $res=gmp_pow($m,$x+1);
-			else{$res=gmp_pow($res,$x);
+			if($i==0 and $bin[$i+1]==1){
+				$res=gmp_pow($m,$x+1);
+			}
+			else{
+				$res=gmp_pow($res,$x);
 				if($bin[$i+1]==1){
-					$res=gmp_mul($res,2);
+					$res=gmp_mul($res,$m);
 				}
 			}
 		}
