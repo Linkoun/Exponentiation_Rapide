@@ -16,7 +16,17 @@ function Algo1($m,$n){
 		$bin = decbin($n);
 		$x=2;
 		$taille = strlen($bin);
-		$res=$m;
+		if($taille==0) return 1;
+			$res=$m;
+		
+		
+		for($i=1;$i<$taille;$i++){
+			$res=gmp_pow($res,$x);
+			if($bin[$i]==1){
+				$res=gmp_mul($res,$m);
+			}
+		}
+		/*
 		for($i=0;$i<$taille-1;$i++){
 			if($i==0 and $bin[$i+1]==1){
 				$res=gmp_pow($m,$x+1);
@@ -27,7 +37,7 @@ function Algo1($m,$n){
 					$res=gmp_mul($res,$m);
 				}
 			}
-		}
+		}*/
 		
 	}
 	else echo "Saisie Incorrecte";
@@ -39,7 +49,16 @@ function Algo1Mod($m,$n,$modulo){
 		$bin = decbin($n);
 		$x=2;
 		$taille = strlen($bin);
+		if($taille==0) return 1;
 		$res=$m;
+		
+		for($i=1;$i<$taille;$i++){
+			$res=gmp_mod(gmp_pow($res,$x),intval($modulo));
+			if($bin[$i]==1){
+				$res=gmp_mod(gmp_mul($res,$m),intval($modulo));
+			}
+		}
+		/*
 		for($i=0;$i<$taille-1;$i++){
 			if($i==0 and $bin[$i+1]==1){
 				$res=gmp_mod(gmp_pow($m,$x+1),intval($modulo));
@@ -50,7 +69,7 @@ function Algo1Mod($m,$n,$modulo){
 					$res=gmp_mod(gmp_mul($res,$m),intval($modulo));
 				}
 			}
-		}
+		}*/
 		
 	}
 	else echo "Saisie incorrecte";
@@ -66,7 +85,7 @@ function Algo2Mod($m,$n,$modulo){
 		$puissancecons=$m;
 		for($i=0;$i<$taille;$i++){
 			if($bin[$i]==1){
-				if($i==0) $res= $puissancecons;
+				if($i==0) $res= $m;
 				else $res=gmp_mod(gmp_mul($res,$puissancecons),intval($modulo));
 			}
 			$puissancecons=gmp_mod(gmp_pow($puissancecons,2),intval($modulo));	
@@ -87,7 +106,7 @@ function Algo2($m,$n){
 			$puissancecons=$m;
 			for($i=0;$i<$taille;$i++){
 				if($bin[$i]==1){
-					if($i==0) $res=$puissancecons;
+					if($i==0) $res=$m;
 					else $res=gmp_mul($res,$puissancecons);
 				}
 				$puissancecons=gmp_pow($puissancecons,2);				
