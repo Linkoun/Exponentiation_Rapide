@@ -16,9 +16,8 @@ function Algo1($m,$n){
 		$bin = decbin($n);
 		$x=2;
 		$taille = strlen($bin);
-		if($taille==0) return 1;
-			$res=$m;
-		
+		$res=$m;
+		if($n==0) return 1;
 		
 		for($i=1;$i<$taille;$i++){
 			$res=gmp_pow($res,$x);
@@ -26,18 +25,7 @@ function Algo1($m,$n){
 				$res=gmp_mul($res,$m);
 			}
 		}
-		/*
-		for($i=0;$i<$taille-1;$i++){
-			if($i==0 and $bin[$i+1]==1){
-				$res=gmp_pow($m,$x+1);
-			}
-			else{
-				$res=gmp_pow($res,$x);
-				if($bin[$i+1]==1){
-					$res=gmp_mul($res,$m);
-				}
-			}
-		}*/
+
 		
 	}
 	else echo "Saisie Incorrecte";
@@ -49,7 +37,7 @@ function Algo1Mod($m,$n,$modulo){
 		$bin = decbin($n);
 		$x=2;
 		$taille = strlen($bin);
-		if($taille==0) return 1;
+		if($n==0) return 1;
 		$res=$m;
 		
 		for($i=1;$i<$taille;$i++){
@@ -58,18 +46,6 @@ function Algo1Mod($m,$n,$modulo){
 				$res=gmp_mod(gmp_mul($res,$m),intval($modulo));
 			}
 		}
-		/*
-		for($i=0;$i<$taille-1;$i++){
-			if($i==0 and $bin[$i+1]==1){
-				$res=gmp_mod(gmp_pow($m,$x+1),intval($modulo));
-			}
-			else{
-				$res=gmp_mod(gmp_pow($res,$x),intval($modulo));
-				if($bin[$i+1]==1){
-					$res=gmp_mod(gmp_mul($res,$m),intval($modulo));
-				}
-			}
-		}*/
 		
 	}
 	else echo "Saisie incorrecte";
@@ -181,7 +157,7 @@ if(isset($_POST['m']) and isset($_POST['n']) and isset($_POST['modulo']) and tri
 		$difference_ms = $timestamp_fin - $timestamp_debut;
 		echo 'Exécution du script : ' . $difference_ms . ' secondes.<br><br>';
 }
-	
+
 if(isset($_POST['m']) and isset($_POST['n']) and trim($_POST['m'])!='' and trim($_POST['n'])!=''){
 	echo "Algorithme 3 sans modulo (Puissance pair ou impaire recursif)<br>";
 	$timestamp_debut = microtime(true);	
