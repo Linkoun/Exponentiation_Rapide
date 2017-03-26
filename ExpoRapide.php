@@ -61,8 +61,7 @@ function Algo2Mod($m,$n,$modulo){
 		$puissancecons=$m;
 		for($i=0;$i<$taille;$i++){
 			if($bin[$i]==1){
-				if($i==0) $res= $m;
-				else $res=gmp_mod(gmp_mul($res,$puissancecons),intval($modulo));
+				$res=gmp_mod(gmp_mul($res,$puissancecons),intval($modulo));
 			}
 			$puissancecons=gmp_mod(gmp_pow($puissancecons,2),intval($modulo));	
 		}
@@ -82,8 +81,7 @@ function Algo2($m,$n){
 			$puissancecons=$m;
 			for($i=0;$i<$taille;$i++){
 				if($bin[$i]==1){
-					if($i==0) $res=$m;
-					else $res=gmp_mul($res,$puissancecons);
+					$res=gmp_mul($res,$puissancecons);
 				}
 				$puissancecons=gmp_pow($puissancecons,2);				
 			}
